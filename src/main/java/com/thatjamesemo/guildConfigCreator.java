@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class guildConfigCreator extends ListenerAdapter {
         ConfigFile configFile = new ConfigFile(serverId);
 
         configFile.setOption("mod-channel-id", "123456789");
-        configFile.setOption("rsvp-channel", "0");
+        configFile.setOption("rsvp-channel", new ArrayList<>()); // Modified from "0" to "new ArrayList<>()"
         configFile.setOption("rsvp-yes", "1076101499949699162");
         configFile.setOption("rsvp-no", "1076101495143018516");
         configFile.setOption("rsvp-maybe", "1076101493343649855");
@@ -30,14 +29,21 @@ public class guildConfigCreator extends ListenerAdapter {
             server.upsertCommand("ping", "Used to test if the discord bot is online.").queue();
             server.upsertCommand("showconfig", "Shows the configurations for your discord guild.").queue();
             server.upsertCommand("createconfig", "Creates and adds commands to your server for configuration.").queue();
-            server.upsertCommand("setrsvpchannel", "Sets the RSVP channel for the server.").addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true).queue();
+            server.upsertCommand("addrsvpchannel", "Sets the RSVP channel for the server.")
+                    .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true)
+                    .queue();
+            server.upsertCommand("removersvpchannel", "Removes a RSVP channel")
+                    .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be removing", true)
+                    .queue();
             server.upsertCommand("setrsvpyes", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
             server.upsertCommand("setrsvpmaybe", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
             server.upsertCommand("setrsvpno", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
-            server.upsertCommand("update", "Sends an update message to all connected servers with a channel set up.")
-                    .addOption(OptionType.STRING, "content", "The content of the update message", true)
-                    .addOption(OptionType.STRING, "title", "The title of the update message.", false)
-                    .queue();
+//            server.upsertCommand("update", "Sends an update message to all connected servers with a channel set up.")
+//                    .addOption(OptionType.STRING, "content", "The content of the update message", true)
+//                    .addOption(OptionType.STRING, "title", "The title of the update message.", false)
+//                    .queue();
+            //TODO: Optimise the creation of commands, add in their options and then make sure that not too many network requests are made.
+
         }
     }
 
@@ -46,7 +52,7 @@ public class guildConfigCreator extends ListenerAdapter {
         ConfigFile configFile = new ConfigFile(serverId);
 
         configFile.setOption("mod-channel-id", "123456789");
-        configFile.setOption("rsvp-channel", "0");
+        configFile.setOption("rsvp-channel", new ArrayList<>());
         configFile.setOption("rsvp-yes", "1076101499949699162");
         configFile.setOption("rsvp-no", "1076101495143018516");
         configFile.setOption("rsvp-maybe", "1076101493343649855");
@@ -61,14 +67,19 @@ public class guildConfigCreator extends ListenerAdapter {
             server.upsertCommand("ping", "Used to test if the discord bot is online.").queue();
             server.upsertCommand("showconfig", "Shows the configurations for your discord guild.").queue();
             server.upsertCommand("createconfig", "Creates and adds commands to your server for configuration.").queue();
-            server.upsertCommand("setrsvpchannel", "Sets the RSVP channel for the server.").addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true).queue();
+            server.upsertCommand("addrsvpchannel", "Sets the RSVP channel for the server.")
+                    .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true)
+                    .queue();
+            server.upsertCommand("removersvpchannel", "Removes a RSVP channel")
+                    .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be removing", true)
+                    .queue();
             server.upsertCommand("setrsvpyes", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
             server.upsertCommand("setrsvpmaybe", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
             server.upsertCommand("setrsvpno", "Set the yes reaction for the RSVP channel").addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true).queue();
-            server.upsertCommand("update", "Sends an update message to all connected servers with a channel set up.")
-                    .addOption(OptionType.STRING, "content", "The content of the update message", true)
-                    .addOption(OptionType.STRING, "title", "The title of the update message.", false)
-                    .queue();
+//            server.upsertCommand("update", "Sends an update message to all connected servers with a channel set up.")
+//                    .addOption(OptionType.STRING, "content", "The content of the update message", true)
+//                    .addOption(OptionType.STRING, "title", "The title of the update message.", false)
+//                    .queue();
         }
     }
 
