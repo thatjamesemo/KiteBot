@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class Main {
@@ -22,28 +23,21 @@ public class Main {
         for (Guild i : api.getGuilds()) {
             Guild server = api.getGuildById(i.getIdLong());
             if (server != null) {
-                server.upsertCommand("ping", "Used to test if the discord bot is online.").queue();
-                server.upsertCommand("showconfig", "Shows the configurations for your discord guild.").queue();
-                server.upsertCommand("createconfig", "Creates and adds commands to your server for configuration.").queue();
-                server.upsertCommand("addrsvpchannel", "Sets the RSVP channel for the server.")
-                        .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true)
-                        .queue();
-                server.upsertCommand("removersvpchannel", "Removes a RSVP channel")
-                        .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be removing", true)
-                        .queue();
-                server.upsertCommand("setrsvpyes", "Set the yes reaction for the RSVP channel")
-                        .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true)
-                        .queue();
-                server.upsertCommand("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
-                        .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true)
-                        .queue();
-                server.upsertCommand("setrsvpno", "Set the yes reaction for the RSVP channel")
-                        .addOption(OptionType.INTEGER, "newemojiid", "The number value in the results from \\:emoji_name:", true)
-                        .queue();
-//                server.upsertCommand("update", "Sends an update message to all connected servers with a channel set up.")
-//                        .addOption(OptionType.STRING, "content", "The content of the update message", true)
-//                        .addOption(OptionType.STRING, "title", "The title of the update message.", false)
-//                        .queue();
+                server.updateCommands().addCommands(
+                        Commands.slash("ping", "Used to test if the discord bot is online."),
+                        Commands.slash("showconfig", "Shows the configurations for your discord guild."),
+                        Commands.slash("createconfig", "Creates and adds commands to your server for configuration."),
+                        Commands.slash("addrsvpchannel", "Sets the RSVP channel for the server.")
+                                .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be using for RSVP.", true),
+                        Commands.slash("removersvpchannel", "Removes a RSVP channel")
+                                .addOption(OptionType.CHANNEL, "rsvp-channel", "The channel that you will be removing", true),
+                        Commands.slash("setrsvpyes", "Set the yes reaction for the RSVP channel")
+                                .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
+                        Commands.slash("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
+                                .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
+                        Commands.slash("setrsvpno", "Set the yes reaction for the RSVP channel")
+                                .addOption(OptionType.INTEGER, "newemojiid", "The number value in the results from \\:emoji_name:", true)
+                ).queue();
             }
         }
     }
