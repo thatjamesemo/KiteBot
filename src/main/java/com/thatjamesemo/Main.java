@@ -1,8 +1,8 @@
 package com.thatjamesemo;
 
+import com.thatjamesemo.Commands.ConfigCommands;
 import com.thatjamesemo.Commands.PingCommand;
 import com.thatjamesemo.Commands.RsvpMessage;
-import com.thatjamesemo.Commands.ShowConfigCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -17,8 +17,8 @@ public class Main {
         api.awaitReady();
 
         api.addEventListener(new PingCommand());
-        api.addEventListener(new ShowConfigCommand());
         api.addEventListener(new RsvpMessage());
+        api.addEventListener(new ConfigCommands());
 
         for (Guild i : api.getGuilds()) {
             Guild server = api.getGuildById(i.getIdLong());
@@ -36,7 +36,7 @@ public class Main {
                         Commands.slash("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
                                 .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
                         Commands.slash("setrsvpno", "Set the yes reaction for the RSVP channel")
-                                .addOption(OptionType.INTEGER, "newemojiid", "The number value in the results from \\:emoji_name:", true)
+                                .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true)
                 ).queue();
             }
         }
