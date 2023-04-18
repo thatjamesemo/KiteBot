@@ -2,7 +2,6 @@
   <configuration default="false" name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="com.thatjamesemo.Main" />
     <module name="KiteBot" />
-    <option name="PROGRAM_PARAMETERS" value="MTA3Mzk5ODYzNTU1NTEwNjkyNg.G_aYAb.kPBZwIYXmlkSwfB6MY7koMUTHG9rPrt9rsb1wk" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.thatjamesemo.*" />
