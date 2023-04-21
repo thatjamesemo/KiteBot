@@ -22,6 +22,8 @@ public class guildConfigCreator extends ListenerAdapter {
         configFile.setOption("rsvp-no", "1076101495143018516");
         configFile.setOption("rsvp-maybe", "1076101493343649855");
         configFile.setOption("rsvp-messages", new ArrayList<>());
+        configFile.setOption("welcome-channels", new ArrayList<>());
+        configFile.setOption("welcome-message", "Welcome to the server {member}!");
 
         JDA api = event.getJDA();
 
@@ -40,7 +42,13 @@ public class guildConfigCreator extends ListenerAdapter {
                     Commands.slash("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
                             .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
                     Commands.slash("setrsvpno", "Set the yes reaction for the RSVP channel")
-                            .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true)
+                            .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
+                    Commands.slash("addwelcomechannel", "Adds a channel to the welcomer")
+                            .addOption(OptionType.CHANNEL, "channel", "The channel you want to add", true),
+                    Commands.slash("removewelcomechannel", "Removes a welcome channel")
+                            .addOption(OptionType.CHANNEL, "channel", "The channel you want to remove", true),
+                    Commands.slash("setwelcomemessage", "Sets the welcome message for your server.")
+
             ).queue();
         }
     }
@@ -55,6 +63,8 @@ public class guildConfigCreator extends ListenerAdapter {
         configFile.setOption("rsvp-no", "1076101495143018516");
         configFile.setOption("rsvp-maybe", "1076101493343649855");
         configFile.setOption("rsvp-messages", new ArrayList<>());
+        configFile.setOption("welcome-channels", new ArrayList<>());
+        configFile.setOption("welcome-message", "Welcome to the server {member}!");
 
 
         JDA api = event.getJDA();
@@ -63,7 +73,6 @@ public class guildConfigCreator extends ListenerAdapter {
         if (server != null) { // Makes sure that the discord bot is registered and working inside this guild.
             server.updateCommands().addCommands(
                     Commands.slash("ping", "Used to test if the discord bot is online."),
-                    Commands.slash("version", "The version of the bot"),
                     Commands.slash("showconfig", "Shows the configurations for your discord guild."),
                     Commands.slash("createconfig", "Creates and adds commands to your server for configuration."),
                     Commands.slash("addrsvpchannel", "Sets the RSVP channel for the server.")
@@ -75,7 +84,13 @@ public class guildConfigCreator extends ListenerAdapter {
                     Commands.slash("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
                             .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
                     Commands.slash("setrsvpno", "Set the yes reaction for the RSVP channel")
-                            .addOption(OptionType.INTEGER, "newemojiid", "The number value in the results from \\:emoji_name:", true)
+                            .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
+                    Commands.slash("addwelcomechannel", "Adds a channel to the welcomer")
+                            .addOption(OptionType.CHANNEL, "channel", "The channel you want to add", true),
+                    Commands.slash("removewelcomechannel", "Removes a welcome channel")
+                            .addOption(OptionType.CHANNEL, "channel", "The channel you want to remove", true),
+                    Commands.slash("setwelcomemessage", "Sets the welcome message for your server.")
+
             ).queue();
         }
     }

@@ -5,7 +5,13 @@
     "1077162456348110968"
   ],
   "rsvp-yes": "1076101499949699162",
-  "rsvp-no": "1076126617987973230",
-  "rsvp-maybe": "1076126617987973230",
-  "rsvp-messages": []
+  "rsvp-no": "1076101495143018516",
+  "rsvp-maybe": "1076101493343649855",
+  "rsvp-messages": [
+    "1098917043287359518"
+  ],
+  "welcome-channels": [
+    "1098284512317816972"
+  ],
+  "welcome-message": "Welcome to the test server {member}!! \u003c:ktyes:1076101499949699162\u003e"
 }

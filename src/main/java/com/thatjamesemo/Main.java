@@ -1,8 +1,6 @@
 package com.thatjamesemo;
 
-import com.thatjamesemo.Commands.ConfigCommands;
-import com.thatjamesemo.Commands.PingCommand;
-import com.thatjamesemo.Commands.RsvpMessage;
+import com.thatjamesemo.Commands.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -13,12 +11,14 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         String token = args[0];
-        JDA api = JDABuilder.createDefault(token).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
+        JDA api = JDABuilder.createDefault(token).enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS).build();
         api.awaitReady();
 
-        api.addEventListener(new PingCommand());
+        api.addEventListener(new SystemTools());
         api.addEventListener(new RsvpMessage());
+        api.addEventListener(new WelcomerCommands());
         api.addEventListener(new ConfigCommands());
+        api.addEventListener(new WelcomerMessage());
 
         for (Guild i : api.getGuilds()) {
             Guild server = api.getGuildById(i.getIdLong());
@@ -36,7 +36,13 @@ public class Main {
                         Commands.slash("setrsvpmaybe", "Set the yes reaction for the RSVP channel")
                                 .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
                         Commands.slash("setrsvpno", "Set the yes reaction for the RSVP channel")
-                                .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true)
+                                .addOption(OptionType.STRING, "newemojiid", "The number value in the results from \\:emoji_name:", true),
+                        Commands.slash("addwelcomechannel", "Adds a channel to the welcomer")
+                                .addOption(OptionType.CHANNEL, "channel", "The channel you want to add", true),
+                        Commands.slash("removewelcomechannel", "Removes a welcome channel")
+                                .addOption(OptionType.CHANNEL, "channel", "The channel you want to remove", true),
+                        Commands.slash("setwelcomemessage", "Sets the welcome message for your server.")
+
                 ).queue();
             }
         }
